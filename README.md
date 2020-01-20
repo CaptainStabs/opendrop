@@ -1,9 +1,34 @@
-# OpenDrop: an Open Source AirDrop Implementation
+# OpenDrop: an Open Source AirDrop Implementation -AOE Support
 
 [![Release](https://img.shields.io/pypi/v/opendrop?color=%23EC6500&label=release)](https://pypi.org/project/opendrop/)
 [![Language grade](https://img.shields.io/lgtm/grade/python/github/seemoo-lab/opendrop?label=code%20quality)](https://lgtm.com/projects/g/seemoo-lab/opendrop/context:python)
 
-*OpenDrop* is a command-line tool that allows sharing files between devices directly over Wi-Fi. Its unique feature is that it is protocol-compatible with Apple AirDrop which allows to share files with Apple devices running iOS and macOS. 
+## Addition to the original package
+
+
+This addition add a new command, called AOE mode.
+The program will spam/broadcast File whenever a new device comes near to broadcasting device.
+
+This allow the file such as leaflet to auto prompts up and distributed in busy corner.
+
+Please be ware this can be very annoying and use with caution.
+
+The `aoe` command work as a combination of find and send command
+
+```
+$ opendrop aoe -f /path/to/some/file
+AOE engaged, Press enter to stop ...
+```
+
+the main thread will search for new device, and a second thread will be spawn, once a new device is found, and try to deliver the said file.
+
+
+//@TODO Add memory / forgot existing device.
+
+
+# Original Packages Info:
+
+*OpenDrop* is a command-line tool that allows sharing files between devices directly over Wi-Fi. Its unique feature is that it is protocol-compatible with Apple AirDrop which allows to share files with Apple devices running iOS and macOS.
 Currently (and probably also for the foreseeable future), OpenDrop only supports sending to Apple devices that are discoverable by *everybody* as the default *contacts only* mode requires [Apple-signed certificates](https://www.apple.com/certificateauthority/pdf/Apple_AAI_CPS_v6.1.pdf).
 
 
@@ -33,7 +58,7 @@ OpenDrop automatically sets `DYLD_LIBRARY_PATH` to look for the Homebrew version
 Linux distributions should ship with more up-to-date versions, so this won't be necessary.
 
 
-## Installation 
+## Installation
 
 Installation of the Python package [release](https://pypi.org/project/opendrop/) is straightforward using `pip3`:
 ```
@@ -62,7 +87,7 @@ Looking for receivers. Press enter to stop ...
 Found  index 0  ID eccb2f2dcfe7  name John’s iPhone
 Found  index 1  ID e63138ac6ba8  name Jane’s MacBook Pro
 ```
-You can then `send` a file using 
+You can then `send` a file using
 ```
 $ opendrop send -r 0 -f /path/to/some/file
 Asking receiver to accept ...
